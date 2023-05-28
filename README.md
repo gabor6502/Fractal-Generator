@@ -6,10 +6,10 @@ Current fractals you can render are the Mandelbrot Set and Burning Ship.
  - Once you have found an interesting are to zoom in on, left click to focus (the preview window will have a green border)
  - Left click once more to engage the zoom, or right click to cancel.
  - You may also right click at any time during this preview zoom mode to exit said mode.
-# Popular keys
+## Popular keys
  - Press 'a' to toggle antialiasing
  - Press 'g' to bring up the GUI
  - Press 's' to save the image on screen
 
-## To Run
+# To Run
 Click the jar file called `FractalGeneratorV2_release` or  runthrough the command line with `java -jar FractalGeneratorV2_release.jar`.
