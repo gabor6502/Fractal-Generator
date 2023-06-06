@@ -12,4 +12,4 @@ Current fractals you can render are the Mandelbrot Set and Burning Ship.
  - Press 's' to save the image on screen
 
 # To Run
-Click the jar file called `FractalGeneratorV2_release` or  runthrough the command line with `java -jar FractalGeneratorV2_release.jar`.
+Click the jar file called `FractalGeneratorV2_release` or  run through the command line with `java -jar FractalGeneratorV2_release.jar`.
