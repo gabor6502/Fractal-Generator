@@ -1,5 +1,5 @@
 # Fractal-Viewer
-Contains a zip file for a Windows implementation of a fractal viewing program I created. 
+Contains a zip file for a Windows 10 version of a fractal viewing program I created. 
 Current fractals you can render are the Mandelbrot Set and Burning Ship.
 ## Quick Zoom and Mouse Navigation
  - Right click on the image to activate a zoom preview window. 
