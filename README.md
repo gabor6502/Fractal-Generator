@@ -1,6 +1,5 @@
-# Fractal-Viewer
+# Fractal-Generator
 Current fractals you can render are the Mandelbrot Set and Burning Ship.
-Runs on Windows 10/11
 
 ## Quick Zoom and Mouse Navigation
  - Right click on the image to activate a zoom preview window. 
@@ -14,4 +13,4 @@ Runs on Windows 10/11
  - Press 'h' for help
 
 # To Run
-Unzip and run the jar file called `FractalGeneratorV2_release` or  run through the command line with `java -jar FractalGeneratorV2_release.jar`.
+In the `dist` folder, run the jar titled `FractalGeneratorV2_release.jar`
