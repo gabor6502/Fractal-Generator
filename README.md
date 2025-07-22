@@ -1,5 +1,5 @@
 # Fractal-Generator
-Current fractals you can render are the Mandelbrot Set and Burning Ship.
+App that performs CPU based rendering of the Mandelbrot Set and Burning Ship fractals. Users can enhance, zoom, and move through these iamges, as well as change fractal colouring schemes.
 
 ## Quick Zoom and Mouse Navigation
  - Right click on the image to activate a zoom preview window. 
