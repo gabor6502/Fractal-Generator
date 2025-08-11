@@ -19,4 +19,5 @@ In the `dist` folder, run the jar titled `FractalGeneratorV2.jar`
  - JDK needs to be installed to run JAR.
  - Save image option may not create folder.
  - Antialising and preview window mouse coordiantes not syncing.
+
 Thank you to everyone who reports issues!
