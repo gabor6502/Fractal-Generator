@@ -51,9 +51,7 @@ public class InputHandler {
         return redraw;
     }//end handleKeyPress
     
-    public boolean handleMouseClick(double mouseX, double mouseY, int mouseButton){//have these passed in case they change during evaluation
-        
-        boolean redraw=true; //assume we must redraw
+    public void handleMouseClick(double mouseX, double mouseY, int mouseButton){//have these passed in case they change during evaluation
         
         switch(mouseButton){
             
@@ -62,7 +60,6 @@ public class InputHandler {
                     
                     case full -> {
                         controller.setToMousePos(mouseX, mouseY, renderer.width, renderer.height);
-                        redraw = !controller.antialiasing();
                     }//end full case
                     
                     case preview -> {
@@ -72,11 +69,11 @@ public class InputHandler {
                         controller.preaprePreviewTranslateZoom(mouseX, mouseY);
                     }//end preview case
                             
-                    case transition -> { //translated, now zoom in cause setup to
+                    case transition -> { //transformed, render in full
                         controller.engagePreviewTranslateZoom(renderer.width, renderer.height);
                         controller.setViewMode(Controller.ViewModes.full);
                     }//end transition case
-                    
+                   
                 }//end nested switch
             }//end left case
             
@@ -96,8 +93,6 @@ public class InputHandler {
             }//end right case
             
         }//end swtich
-        
-        return redraw; //return need to redraw
         
     }//end handleMouseClick
     

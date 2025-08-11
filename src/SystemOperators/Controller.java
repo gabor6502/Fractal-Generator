@@ -20,7 +20,7 @@ public class Controller {
     
     //**********ENUMS*************
     public enum ColouringMethods{EscapeTimes, Potential, NormalMap, White, NormalMapCustom}//colouring the set methods (normalMapCustom is WIP)
-    public enum AAMethods{none, supersampling, dsp}; //Antialiasing methods (dsp is WIP)
+    public enum AAMethods{none, supersampling}
     public enum ViewModes{full, transition, preview, exitPreview}; //viewing the fractals in full or in preview mode, or transitioning between  
     
     //**********CONSTANTS**********
@@ -120,8 +120,8 @@ public class Controller {
     }//end init constructor
     
     //*********ACCESSESORS***************
-    public boolean antialiasing(){//TEMPORARY once dsp is working, need to change how this works with the GUI
-        return antialiasing ==AAMethods.supersampling;
+    public boolean antialiasing(){
+        return antialiasing == AAMethods.supersampling;
     }//end antialiasing
     
     public int getIterations(){
@@ -329,9 +329,6 @@ public class Controller {
 
         if(antialiasing == AAMethods.none){
             antialiasing = AAMethods.supersampling;
-            //P3D doesn't work with this (that I know right now) so I gotta divide :(
-            //can't use this line
-            //renderer.colorMode(RGB, (float)supersampleFactor*(float)supersampleFactor);
         }//end if
         else{
             antialiasing = AAMethods.none;

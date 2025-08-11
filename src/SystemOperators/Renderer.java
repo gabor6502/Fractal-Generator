@@ -11,6 +11,7 @@ import processing.opengl.PGraphicsOpenGL;
 import processing.opengl.PJOGL;
 
 
+
 /*********************
  * 
  * @author elang
@@ -45,19 +46,23 @@ public class Renderer extends PApplet{
     public void settings(){
         size(800,800, PApplet.P3D);
         PJOGL.profile = 1;
+        PJOGL.setIcon(".\\icon.png");
+        
         noSmooth();
     }//end settings
     
     @Override
     public void setup(){
         
-    //setup gl2 access    
-    PGraphicsOpenGL pg = (PGraphicsOpenGL)g;
-    System.out.println(PGraphicsOpenGL.OPENGL_VERSION);
+        getSurface().setTitle("Fractal Viewer V2");
+        
+        //setup gl2 access    
+        PGraphicsOpenGL pg = (PGraphicsOpenGL)g;
+        System.out.println(PGraphicsOpenGL.OPENGL_VERSION);
 
-    pgl = (PJOGL) beginPGL();
-    gl2 = pgl.gl.getGL2();
-  
+        pgl = (PJOGL) beginPGL();
+        gl2 = pgl.gl.getGL2();
+
         colorMode(RGB,1.0f);
         //colorMode(HSB,1.0f);
         picture = new FractalImageBuffer(width);
@@ -71,16 +76,6 @@ public class Renderer extends PApplet{
         noLoop();//documentation says this should be the last line in setup
               
     }//end setup
-    
-    //IN DEVELOPMENT
-    private void makeMovieFrames(){
-        FractalImageBuffer frame = new FractalImageBuffer(width);
-        int frameCount = 0;
-        //String name = String.format("%04d", frameNo); //fill with 0's to match processing movie maker's expectations "####.png"
-        //try at 10x AA for fast
-        //or 50x if you've got time 
-        
-    }
     
     private void getFocus(){
         if(!focused){
@@ -109,19 +104,23 @@ public class Renderer extends PApplet{
                         mouseX, 
                         mouseY, 
                         width, height);
-                plotImage(previewImage); //keep plotting the image as the user moves their mouse
+                plotImage(previewImage); //keep plotting the preview image as the user moves their mouse
                 borderPreviewWindow();
             }//end preview case
             
             case exitPreview -> {
-                plotImage(picture); //once image is replotted we can go back to full mode
                 controller.setViewMode(Controller.ViewModes.full); 
+                
+                plotImage(picture); //once image is replotted we can go back to full mode
+             
                 noLoop(); //now that it's reset don't need to iterate anymore
             }//end exitPreview case
             
             case transition -> {
                 plotImage(previewImage); //keep the image on screen so the user knows where they're gonna go
+                
                 borderPreviewWindow(); 
+                
                 noLoop(); //no more looping needed
             }//end transition case
             
@@ -167,9 +166,9 @@ public class Renderer extends PApplet{
     @Override
     public void mousePressed(){
   
-        //if the mouse function returns true the mouse click will do a redraw
-        if(inputHandler.handleMouseClick(mouseX, mouseY, mouseButton))
-            redraw(); 
+        inputHandler.handleMouseClick(mouseX, mouseY, mouseButton);
+        redraw(); 
+                
 
     }//end mousePressed   
     
@@ -182,7 +181,6 @@ public class Renderer extends PApplet{
     protected void setupForPreviewMode(){
         loop(); //re start the draw loop running
        
-       // colorMode(RGB, 1.0f); //super sampled AA changes this so change it back
         previewWindowBorder.assign(1, 1, 1); //border it in white
     }//end setupForPreviewMode
     
@@ -192,15 +190,21 @@ public class Renderer extends PApplet{
     }//end setupForTransitionMode
     
     private void borderPreviewWindow(){
-        //various colouring settings for the window
-        stroke(previewWindowBorder.red(), previewWindowBorder.green(), previewWindowBorder.blue());
+
+        //two colouring settings for the window
+        gl2.glColor3f(previewWindowBorder.red(), previewWindowBorder.green(), previewWindowBorder.blue());
         
-        strokeWeight(2);
+        gl2.glLineWidth(2.0f);
+        gl2.glBegin(GL2.GL_LINES);
+            
+            gl2.glVertex2i(0, previewImage.getDimension() + 1);
+            gl2.glVertex2i(previewImage.getDimension() + 1, previewImage.getDimension() + 1);
+            
+            gl2.glVertex2i(previewImage.getDimension() + 1, 0);
+            gl2.glVertex2i(previewImage.getDimension() + 1, previewImage.getDimension() + 1);
         
-        line(0,previewImage.getDimension()+1, previewImage.getDimension()+1,previewImage.getDimension()+1);
-        line(previewImage.getDimension()+1, 0, previewImage.getDimension()+1, previewImage.getDimension()+1);
-        
-        strokeWeight(1);
+        gl2.glEnd();
+        gl2.glLineWidth(1.0f);
     }//end borderPreviewWindow
     
     //returns pointer, this is for save method to access
@@ -208,13 +212,11 @@ public class Renderer extends PApplet{
         return picture;
     }//get displayed factal
     
-    
     public static void main(String[] args) {
         
         //run the processing sketch
-         String[] pArgs = {"Renderer"};
          Renderer r = new Renderer();
-         PApplet.runSketch(pArgs, r);
+         PApplet.runSketch(new String[]{""}, r);
          
     }//end main
     
