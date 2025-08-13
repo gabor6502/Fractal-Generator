@@ -16,7 +16,6 @@ App that performs CPU based rendering of the Mandelbrot Set and Burning Ship fra
 In the `dist` folder, run the jar titled `FractalGeneratorV2.jar`
 
 # Current Known Issues (2025)
- - JDK needs to be installed to run JAR.
  - Save image option may not create folder.
  - Antialising and preview window mouse coordiantes not syncing.
 
